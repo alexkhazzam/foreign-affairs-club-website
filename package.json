@@ -1,0 +1,30 @@
+{
+  "name": "foreign-affairs-club-website",
+  "version": "1.0.0",
+  "description": "Website for the Foreign Affairs Club at Great Neck North High School",
+  "main": "./dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/server.js",
+    "start:dev": "nodemon ./dist/.server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexkhazzam/foreign-affairs-club-website.git"
+  },
+  "author": "Alexander Khazzam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexkhazzam/foreign-affairs-club-website/issues"
+  },
+  "homepage": "https://github.com/alexkhazzam/foreign-affairs-club-website#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.2",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
