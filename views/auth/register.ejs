@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/auth/register.css">
+    <link rel="stylesheet" href="/css/auth/shared.css">
+    <script src="/js/auth/register.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <div id="register-wrapper">
+        <div id="register">
+            <form action="/register" method="POST" onsubmit="showRegisterSpinner()">
+                <% if (!tokenSent && !accountCreated && !invalidToken) { %>
+                    <% if (errorMessage) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= errorMessage %>
+                        </div>
+                    <% } %>
+                    <p class="register-form-header">Email (must be either an officer or club advisor's)</p>
+                    <input type="email" class="form-control" required name="email" id="email" placeholder="Email"/>
+                    <p class="register-form-header">First Name</p>
+                    <input type="text" class="form-control" id="firstName" required name="firstName" placeholder="First Name"/>
+                    <p class="register-form-header">Last Name</p>
+                    <input type="textarea" class="form-control" id="lastName" required name="lastName" placeholder="Last Name"/>
+                    <p class="register-form-header">Password</p>
+                    <input type="password" class="form-control" id="pass1" required name="pass1" placeholder="Password"/>
+                    <p class="register-form-header">Confirm Password</p>
+                    <input type="password" class="form-control" id="pass2" required name="pass2" placeholder="Confirm Password"/>
+                <% } %>
+                <% if (invalidToken) { %>
+                    <div class="alert alert-danger" role="alert">
+                        Token is invalid.
+                    </div>
+                    <% } %>
+                <% if (tokenSent || invalidToken) { %>
+                    <p class="register-form-header">Enter Token</p>
+                    <input type="text" class="form-control" id="token" required name="token" placeholder="123456"/>
+                <% } %>
+                <% if (!accountCreated) { %>
+                    <div id="register-submit-wrapper">
+                        <% if (tokenSent || invalidToken) { %>
+                            <button type="submit" class="btn btn-success" id="register-btn">Confirm Account</button>
+                        <% } %>
+                        <% if (!tokenSent && !invalidToken) { %>
+                            <button type="submit" class="btn btn-success" id="register-btn">Register</button>
+                        <% } %>
+                          <div class="spinner-border text-primary" role="status" id="register-spinner">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                    </div>
+                    <% if (!tokenSent && !invalidToken) { %>
+                        <p id="log-in-link">Already have an account? Click <a href="/login">here</a> to log in.</p>
+                    <% } %>
+                <% } %>
+                <% if (accountCreated) { %>
+                    <div class="alert alert-success" role="alert" id="account-created-alert">
+                        Account successfully created! Click <a href="/login">here</a> to log in.
+                    </div>
+                <% } %>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

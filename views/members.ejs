@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="./css/members.css" />
+<div class="accordion" id="accordionExample">
+    <% for (let i = 0; i < years.length; i++) { %>
+        <div class="card">
+          <div class="card-header" id="heading<%= i %>">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">
+                Collapsible Group Item #1
+              </button>
+            </h2>
+          </div>
+          <div id="collapse<%= i %>" class="collapse" aria-labelledby="heading<%= i %>" data-parent="#accordionExample">
+            <div class="card-body">
+                <div id="officers">
+                    <h5>Officers</h5>
+                    <% for (let k = 0; k < years[i].officers.length; k++) { %>
+                        <p class="officer"><%= years[i].officers[k] %></p>
+                    <% } %>
+                </div>
+                <div id="members">
+                    <h5>Members</h5>
+                    <% for (let k = 0; k < years[i].members.length; k++) { %>
+                        <p class="member"><%= years[i].members[k] %></p>
+                    <% } %>
+                </div>
+            </div>
+          </div>
+        </div>
+    <% } %>
+</div>

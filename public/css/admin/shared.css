@@ -1,0 +1,18 @@
+.nav-tabs {
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  justify-content: center;
+  margin-bottom: 5% !important;
+}
+
+.active {
+  border-radius: 0px !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.nav-link:hover {
+  border-radius: 0px !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}

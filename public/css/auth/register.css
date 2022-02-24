@@ -1,0 +1,42 @@
+#register-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #9b65b8, #89f4ad);
+  height: 100vh;
+}
+
+#register {
+  width: 60%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
+  padding: 20px;
+}
+
+#register-spinner {
+  margin: 0px !important;
+  display: none;
+}
+
+#account-created-alert {
+  margin: 0px !important;
+}
+
+#register-submit-wrapper {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+#register-btn {
+  margin-right: 10px;
+}
+
+#log-in-link {
+  margin-top: 10px;
+}
+
+.register-form-header {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members</title>
+    <link rel="stylesheet" href="/css/admin/members-speakers/shared.css" />
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <script src="/js/admin/speakers.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/members">Members</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/admin/speakers">Speakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/misc">Misc</a>
+        </li>
+    </ul> 
+
+    <div id="speaker">
+      <p>Upon completing the below form, a new guest speaker will be added to the guest speaker section of our website.</p>
+      <form onsubmit="event.preventDefault(); submitNewGuestSpeaker();">
+        <p class="speaker-form-header">Date</p>
+        <input type="text" placeholder="month day, year" class="form-control" required name="date" id="date"/>
+        <p class="speaker-form-header">Full Name</p>
+        <input type="text" placeholder="John Smith" class="form-control" required name="speaker" id="speaker-name"/>
+        <p class="speaker-form-header">Description about speaker and/or what topics he or she discussed with the club.</p>
+        <textarea type="textarea" class="form-control" required name="speakerDescription" id="description"></textarea>
+        <div id="speaker-submit-wrapper">
+          <button type="submit" class="btn btn-success" id="school-year-btn">Add New Speaker</button>
+          <div class="spinner-border text-primary" role="status" id="speaker-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div class="alert alert-success" id="new-speaker-added-success" role="alert">
+          Speaker record successfully added! Refresh the page to see it speaker below. 
+        </div>
+        <div class="alert alert-danger" id="new-speaker-added-error" role="alert">
+          Oops! Either a WiFi or server-side error occurred; try again soon. 
+        </div>
+      </form>
+    </div>
+
+    <div id="current-speakers">
+      <div id="remove-speaker-text-wrapper">
+        <% if (speakers.length === 0) { %>
+          <p id="current-speakers-header">When you have added a speaker, it will be displayed below.</p>
+          <% } %>
+          <% if (speakers.length > 0) { %>
+            <p id="current-speakers-header">Click 'remove' to remove a speaker from the speaker section of our website.</p>
+            <% } %>
+        <div class="spinner-border text-primary" role="status" id="remove-speaker-spinner">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="alert alert-success" id="speaker-removed-success" role="alert">
+        Speaker successfully removed!
+      </div>
+      <div class="alert alert-danger" id="speaker-removed-error" role="alert">
+        Oops! Either a WiFi or server-side error occurred; try again soon. 
+      </div>
+      <% for (let i = 0; i < speakers.length; i++) { %>
+        <div class="year">
+          <div class="alert alert-primary" role="alert">
+            <%= speakers[i].name + " | " + speakers[i].date %>
+          </div>
+          <button type="button" class="btn btn-danger remove-speaker-btn" id=<%= speakers[i]._id %>>Remove</button>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

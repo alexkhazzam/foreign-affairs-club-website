@@ -1,0 +1,25 @@
+#navbar {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  position: fixed;
+  background-color: #111 !important;
+  width: 100%;
+  z-index: 500;
+}
+
+.nav-link {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #25b79f !important;
+}
+
+.log-in {
+  color: #25b79f !important;
+}
+
+#logo {
+  width: 65px;
+  height: 65px;
+}

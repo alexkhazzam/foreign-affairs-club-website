@@ -1,0 +1,17 @@
+.card {
+  width: fit-content;
+}
+
+#officers,
+#members {
+  text-align: left;
+}
+
+#officers {
+  margin-bottom: 20px;
+}
+
+.officer,
+.member {
+  margin: 5px 0px;
+}

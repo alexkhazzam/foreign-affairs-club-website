@@ -1,0 +1,87 @@
+#school-year,
+#current-years,
+#speaker,
+#current-speakers {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  width: 80%;
+  text-align: left;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+#school-year-warning {
+  margin-top: 20px !important;
+}
+
+#school-year-spinner,
+#speaker-spinner {
+  display: none;
+  margin-left: 10px;
+}
+
+#school-year-submit-wrapper,
+#speaker-submit-wrapper {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+}
+
+#new-year-added-success,
+#new-year-added-error,
+#new-speaker-added-success,
+#new-speaker-added-error {
+  margin-top: 30px !important;
+  display: none;
+}
+
+#remove-school-year-text-wrapper,
+#remove-speaker-text-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+#remove-school-year-spinner,
+#new-year-removed-success,
+#new-year-removed-error,
+#remove-speaker-spinner,
+#speaker-removed-success,
+#speaker-removed-error {
+  display: none;
+}
+
+#new-year-removed-success,
+#new-year-removed-error {
+  margin-bottom: 10px !important;
+  margin-top: 10px !important;
+}
+
+#current-years-header,
+#current-speakers-header {
+  margin: 0px;
+  margin-right: 10px;
+}
+
+.school-year-form-header,
+.speaker-form-header {
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.year {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.alert {
+  width: 100%;
+  margin: 0px !important;
+  border-radius: 0px !important;
+}
+
+.remove-year-btn,
+.remove-speaker-btn {
+  height: 50px;
+  border-radius: 0px !important;
+}

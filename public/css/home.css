@@ -1,0 +1,9 @@
+html,
+body {
+  background-color: #111 !important;
+}
+
+#copyright {
+  text-align: center;
+  color: #fff;
+}

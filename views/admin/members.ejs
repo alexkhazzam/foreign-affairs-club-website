@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members</title>
+    <link rel="stylesheet" href="/css/admin/members-speakers/shared.css" />
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <script src="/js/admin/members.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/members">Members</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/speakers">Speakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/misc">Misc</a>
+        </li>
+    </ul> 
+
+    <div id="school-year">
+      <p>Upon completing the below form, a new year will be added to the members section of our website.</p>
+      <form onsubmit="event.preventDefault(); submitNewSchoolYearForm();">
+        <div class="alert alert-warning" role="alert" id="school-year-warning">
+          Ensure that the following sections are filled out as per the examples, including all necessary semicolons, commas, and dashes (there should not be a comma after the last value); failure to do so will result in an innacurate display of data. 
+        </div>
+        <p class="school-year-form-header">School Year</p>
+        <input type="text" placeholder="Month Year - Month Year" class="form-control" required name="year" id="year"/>
+        <p class="school-year-form-header">Officers (order from most important position to least)</p>
+        <textarea type="textarea" class="form-control" placeholder="position: name, position: name, position: name
+        " id="officers" required name="officers"></textarea>
+        <p class="school-year-form-header">Members</p>
+        <textarea type="textarea" class="form-control" placeholder="name, name, name
+        " id="members" required name="members"></textarea>
+        <div id="school-year-submit-wrapper">
+          <button type="submit" class="btn btn-success" id="school-year-btn">Add New Year</button>
+          <div class="spinner-border text-primary" role="status" id="school-year-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div class="alert alert-success" id="new-year-added-success" role="alert">
+          New year added successfully! Refresh the page to see it below. 
+        </div>
+        <div class="alert alert-danger" id="new-year-added-error" role="alert">
+          Oops! Either a WiFi or server-side error occurred; try again soon. 
+        </div>
+      </form>
+    </div>
+
+    <div id="current-years">
+      <div id="remove-school-year-text-wrapper">
+        <% if (years.length === 0) { %>
+          <p id="current-years-header">When you have added a year, it will be displayed below.</p>
+          <% } %>
+          <% if (years.length > 0) { %>
+            <p id="current-years-header">Click 'remove' to remove a year from the members section of our website.</p>
+            <% } %>
+        <div class="spinner-border text-primary" role="status" id="remove-school-year-spinner">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="alert alert-success" id="new-year-removed-success" role="alert">
+        New year successfully removed!
+      </div>
+      <div class="alert alert-danger" id="new-year-removed-error" role="alert">
+        Oops! Either a WiFi or server-side error occurred; try again soon. 
+      </div>
+      <% for (let i = 0; i < years.length; i++) { %>
+        <div class="year">
+          <div class="alert alert-primary" role="alert">
+            <%= years[i].year %>
+          </div>
+          <button type="button" class="btn btn-danger remove-year-btn" id=<%= years[i]._id %>>Remove</button>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+html,
+body {
+  background-color: #111 !important;
+}
+
+#welcome-message-wrapper {
+  height: fit-content;
+  background-color: #111 !important;
+  padding-top: 5%;
+}
+
+#welcome-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin: auto;
+  margin-bottom: 0px;
+  width: 80%;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.active {
+  background-color: transparent !important;
+}
+
+.nav-tabs {
+  margin-bottom: 0px !important;
+}
+
+canvas {
+  background-color: #111 !important;
+  overflow-x: hidden;
+  cursor: crosshair;
+  display: block;
+}

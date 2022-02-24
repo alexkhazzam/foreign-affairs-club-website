@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/js/admin/home.js" defer></script>
+    <link rel="stylesheet" href="/css/admin/home.css" />
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/members">Members</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/speakers">Speakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/misc">Misc</a>
+        </li>
+    </ul>
+  <div id="welcome-message-wrapper">
+    <p id="welcome-message">Welcome to the admin portal of the Foreign Affairs Club! It's great to have you on board as an officer, and we hope you put your best effort forth when ensuring this club's success.</p>
+  </div>
+	<canvas id='canvas'>Canvas is not supported in your browser.<canvas>
+</body>
+</html>
