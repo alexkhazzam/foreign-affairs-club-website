@@ -16,20 +16,22 @@ const client = mongoose
 
 const app = express();
 
-app.use(
-  session({
-    secret: process.env.CLIENT_SECRET!,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      clientPromise: client,
-      stringify: false,
-      autoRemove: 'interval',
-      autoRemoveInterval: 1,
-      ttl: 1 * 24 * 60 * 60,
-    }),
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.CLIENT_SECRET!,
+//     resave: false,
+//     saveUninitialized: false,
+//     store: MongoStore.create({
+//       clientPromise: client,
+//       stringify: false,
+//       autoRemove: 'interval',
+//       autoRemoveInterval: 1,
+//       ttl: 1 * 24 * 60 * 60,
+//     }),
+//   })
+// );
+
+// add
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
