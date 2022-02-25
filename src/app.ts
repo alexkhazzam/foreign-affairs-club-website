@@ -16,15 +16,13 @@ const client = mongoose
 
 const app = express();
 
-// app.use(
-//   session({
-//     secret: process.env.CLIENT_SECRET!,
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
-
-// add
+app.use(
+  session({
+    secret: process.env.CLIENT_SECRET!,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');

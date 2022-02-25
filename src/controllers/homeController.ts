@@ -3,9 +3,6 @@ import SpeakerSchema from '../schema/Speaker';
 import YearSchema from '../schema/Year';
 
 const getHomepage = async (req: Request, res: Response): Promise<void> => {
-  console.log('base url: ' + req.baseUrl);
-  console.log('base url: ' + req.url);
-  console.log(req.headers.location);
   res.render('home', {
     years: await YearSchema.find(),
     speakers: (await SpeakerSchema.find()).reverse(),
