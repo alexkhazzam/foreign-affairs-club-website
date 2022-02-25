@@ -21,13 +21,6 @@ const app = express();
 //     secret: process.env.CLIENT_SECRET!,
 //     resave: false,
 //     saveUninitialized: false,
-//     store: MongoStore.create({
-//       clientPromise: client,
-//       stringify: false,
-//       autoRemove: 'interval',
-//       autoRemoveInterval: 1,
-//       ttl: 1 * 24 * 60 * 60,
-//     }),
 //   })
 // );
 
