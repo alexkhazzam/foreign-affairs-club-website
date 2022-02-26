@@ -1,12 +1,3 @@
-// window.requestAnimFrame = (function(){
-// 	return window.requestAnimationFrame ||
-// 		window.webkitRequestAnimationFrame ||
-// 		window.mozRequestAnimationFrame ||
-// 		function (callback){
-// 			window.setTimeout(callback, 1000/60);
-// 		};
-// })();
-
 window.onload = function () {
   var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
@@ -26,25 +17,16 @@ window.onload = function () {
 
   canvas.width = cw;
   canvas.height = ch;
-  //$('canvas').css("background-size":cw);
-
-  // var snd = new Audio("http://soundjax.com/reddo/38563%5EFirework.mp3"); // buffers automatically when created
   var snd = new Audio('http://soundjax.com/reddo/51715%5Efirework.mp3');
 
-  // now we are going to setup our function placeholders for the entire demo
-
-  // get a random number within a range
   function random(min, max) {
     return min + Math.random() * (max - min);
   }
 
-  // calculate the distance between two points
   function calculateDistance(p1x, p1y, p2x, p2y) {
     return Math.sqrt((p1x - p2x) * (p1x - p2x) + (p1y - p2y) * (p1y - p2y));
   }
 
-  /*==================================================== Firework Class ======================================================*/
-  // create firework
   function Firework(sx, sy, tx, ty) {
     //actual coordinates
     this.x = sx;

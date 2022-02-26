@@ -1,6 +1,7 @@
 html,
 body {
-  background-color: #111 !important;
+  /* background-color: #111 !important; */
+  background-color: rgb(36, 36, 36) !important;
 }
 
 #copyright {

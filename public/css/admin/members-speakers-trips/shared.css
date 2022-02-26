@@ -1,7 +1,9 @@
 #school-year,
 #current-years,
 #speaker,
-#current-speakers {
+#current-speakers,
+#current-trips,
+#trips {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 20px;
   width: 80%;
@@ -15,28 +17,37 @@
 }
 
 #school-year-spinner,
-#speaker-spinner {
+#speaker-spinner,
+#trip-spinner {
   display: none;
   margin-left: 10px;
 }
 
 #school-year-submit-wrapper,
-#speaker-submit-wrapper {
+#speaker-submit-wrapper,
+#trip-submit-wrapper {
   display: flex;
   margin-top: 30px;
   align-items: center;
 }
 
+#confirm-remove-record-spinner,
+#invalid-password {
+  display: none;
+}
+
+#new-trip-added-error,
+#new-trip-added-success,
 #new-year-added-success,
 #new-year-added-error,
 #new-speaker-added-success,
 #new-speaker-added-error {
   margin-top: 30px !important;
-  display: none;
 }
 
 #remove-school-year-text-wrapper,
-#remove-speaker-text-wrapper {
+#remove-speaker-text-wrapper,
+#remove-trip-text-wrapper {
   display: flex;
   align-items: center;
 }
@@ -46,29 +57,36 @@
 #new-year-removed-error,
 #remove-speaker-spinner,
 #speaker-removed-success,
-#speaker-removed-error {
+#speaker-removed-error,
+#trip-removed-success,
+#trip-removed-error,
+#remove-trip-spinner {
   display: none;
 }
 
 #new-year-removed-success,
-#new-year-removed-error {
+#new-year-removed-error,
+#new-trip-removed-success {
   margin-bottom: 10px !important;
   margin-top: 10px !important;
 }
 
 #current-years-header,
-#current-speakers-header {
+#current-speakers-header,
+#current-trips-header {
   margin: 0px;
   margin-right: 10px;
 }
 
 .school-year-form-header,
-.speaker-form-header {
+.speaker-form-header,
+.trip-form-header {
   margin-top: 10px;
   margin-bottom: 2px;
 }
 
-.year {
+.year,
+.trip {
   display: flex;
   margin-top: 10px;
   align-items: center;
@@ -81,7 +99,8 @@
 }
 
 .remove-year-btn,
-.remove-speaker-btn {
+.remove-speaker-btn,
+.remove-trip-btn {
   height: 50px;
   border-radius: 0px !important;
 }

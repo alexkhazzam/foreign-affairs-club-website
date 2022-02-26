@@ -24,6 +24,13 @@ Router.post(
   adminController.postSpeakersPage
 );
 Router.get('/admin/misc', adminMiddleware, adminController.getMiscPage);
+Router.get('/admin/trips', adminMiddleware, adminController.getTripsPage);
+Router.post('/admin/trips', adminMiddleware, adminController.postTripsPage);
+Router.post(
+  '/admin/session',
+  adminMiddleware,
+  adminController.postAdminSession
+);
 
 Router.get('/register', authController.getRegisterPage);
 Router.post('/register', authController.postRegisterPage);

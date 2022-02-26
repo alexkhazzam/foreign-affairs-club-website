@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-exports.default = mongoose_1.default.model('speakers', new mongoose_1.default.Schema({
+exports.default = mongoose_1.default.model('speakers-trips', new mongoose_1.default.Schema({
     date: {
         type: String,
     },
@@ -12,6 +12,9 @@ exports.default = mongoose_1.default.model('speakers', new mongoose_1.default.Sc
         type: String,
     },
     description: {
+        type: String,
+    },
+    type: {
         type: String,
     },
 }));

@@ -21,6 +21,9 @@ Router.post('/admin/members', adminMiddleware, adminController_1.default.postMem
 Router.get('/admin/speakers', adminMiddleware, adminController_1.default.getSpeakersPage);
 Router.post('/admin/speakers', adminMiddleware, adminController_1.default.postSpeakersPage);
 Router.get('/admin/misc', adminMiddleware, adminController_1.default.getMiscPage);
+Router.get('/admin/trips', adminMiddleware, adminController_1.default.getTripsPage);
+Router.post('/admin/trips', adminMiddleware, adminController_1.default.postTripsPage);
+Router.post('/admin/session', adminMiddleware, adminController_1.default.postAdminSession);
 Router.get('/register', auth_1.default.getRegisterPage);
 Router.post('/register', auth_1.default.postRegisterPage);
 Router.get('/login', auth_1.default.getLoginPage);

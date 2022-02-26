@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Members</title>
-    <link rel="stylesheet" href="/css/admin/members-speakers/shared.css" />
+    <link rel="stylesheet" href="/css/admin/members-speakers-trips/shared.css" />
     <link rel="stylesheet" href="/css/admin/shared.css" />
     <script src="/js/admin/members.js" defer></script>
     <%- include('../includes/bootstrap.ejs') %>
@@ -19,16 +19,19 @@
           <a class="nav-link active" href="/admin/members">Members</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/speakers">Speakers</a>
+          <a class="nav-link" href="/admin/speakers">Guest Speakers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/misc">Misc</a>
+          <a class="nav-link" href="/admin/trips">Field Trips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/admin-settings">Admin Settings</a>
         </li>
     </ul> 
-
+    <%- include('./modal.ejs') %>
     <div id="school-year">
       <p>Upon completing the below form, a new year will be added to the members section of our website.</p>
-      <form onsubmit="event.preventDefault(); submitNewSchoolYearForm();">
+      <form onsubmit="showYearSpinner();" action="/admin/members" method="POST">
         <div class="alert alert-warning" role="alert" id="school-year-warning">
           Ensure that the following sections are filled out as per the examples, including all necessary semicolons, commas, and dashes (there should not be a comma after the last value); failure to do so will result in an innacurate display of data. 
         </div>
@@ -46,12 +49,16 @@
             <span class="sr-only">Loading...</span>
           </div>
         </div>
-        <div class="alert alert-success" id="new-year-added-success" role="alert">
-          New year added successfully! Refresh the page to see it below. 
-        </div>
-        <div class="alert alert-danger" id="new-year-added-error" role="alert">
-          Oops! Either a WiFi or server-side error occurred; try again soon. 
-        </div>
+        <% if (yearCreated) { %>
+          <div class="alert alert-success" id="new-year-added-success" role="alert">
+            New year added successfully!
+          </div>
+        <% } %>
+        <% if (error) { %>
+          <div class="alert alert-danger" id="new-year-added-error" role="alert">
+            Oops! Either a WiFi or server-side error occurred; try again soon. 
+          </div>
+        <% } %>
       </form>
     </div>
 
@@ -78,7 +85,7 @@
           <div class="alert alert-primary" role="alert">
             <%= years[i].year %>
           </div>
-          <button type="button" class="btn btn-danger remove-year-btn" id=<%= years[i]._id %>>Remove</button>
+          <button type="button" class="btn btn-danger remove-year-btn" data-toggle="modal" data-target="#exampleModal" id=<%= years[i]._id %> >Remove</button>
         </div>
       <% } %>
     </div>

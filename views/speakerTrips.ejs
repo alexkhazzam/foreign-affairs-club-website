@@ -1,0 +1,39 @@
+<script src="/js/speakers.js" defer></script>
+<link rel="stylesheet" href="/css/speakers.css" />
+<div id="speakers">
+  <h2 id="speaker-header">Guest Speakers and Field Trips</h2>
+  <div class="timeline">
+    <div class="line"></div>
+    <% for (let i = 0; i < speakers.length; i++) { %>
+        <div class="section">
+            <div class="bead"></div>
+            <div class="content">
+              <div class="content-header-wrapper">
+                <div>
+                  <% if (speakers[i].type === 'speaker') { %>
+                    <h3 id="st-title">Guest Speaker</h3>
+                  <% } %>
+                  <% if (speakers[i].type === 'trip') { %>
+                    <h3 id="st-title">Field Trip</h3>
+                  <% } %>
+                  <h5><%= speakers[i].name %></h5>
+                  <h6><%= speakers[i].date %></h6>
+                </div>
+                <% if (speakers[i].type === 'speaker') { %>                  
+                  <div class="speaker-icon-wrapper">
+                    <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-user-advertising-kiranshastry-lineal-kiranshastry-7.png"/>
+                  </div>
+                  <% } %>
+                  <% if (speakers[i].type === 'trip') { %>
+                    <div class="trip-icon-wrapper">
+                      <img src="https://img.icons8.com/ios-filled/64/000000/around-the-globe.png"/>
+                    </div>
+                    <% } %>
+                </div>
+              <hr>
+              <li><%= speakers[i].description%></li>
+            </div>
+        </div>
+    <% } %>
+</div>
+

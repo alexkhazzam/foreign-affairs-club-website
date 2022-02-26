@@ -1,0 +1,27 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Removal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form onsubmit="event.preventDefault();">
+          <div class="modal-body">
+            <p id="confirm-removal-text">Enter your password to remove the year.</p>
+            <input type="password" placeholder="Password" class="form-control" required id="password"/>
+          </div>
+          <div class="modal-footer">
+            <div class="spinner-border text-primary" role="status" id="confirm-remove-record-spinner">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <button type="button" class="btn btn-danger" id="enter-password-btn">Remove Year</button>
+          </div>
+          <div class="alert alert-danger" id="invalid-password" role="alert">
+            Invalid password! Reset password <a href="/password-reset">here.</a>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

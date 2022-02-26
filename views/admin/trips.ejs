@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Trips</title>
+    <link rel="stylesheet" href="/css/admin/members-speakers-trips/shared.css" />
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <script src="/js/admin/trips.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/members">Members</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/speakers">Guest Speakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/trips">Field Trips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/admin-settings">Admin Settings</a>
+        </li>
+    </ul>
+    <%- include('./modal.ejs') %> 
+    <div id="trips">
+      <p>Upon completing the below form, a new guest speaker will be added to the guest speaker and field trip section of our website.</p>
+      <form action="/admin/trips" method="POST" onsubmit="showTripSpinner()">
+        <p class="trip-form-header">Date</p>
+        <input type="text" placeholder="month day, year" class="form-control" required name="date" id="date"/>
+        <p class="trip-form-header">Field trip name</p>
+        <input type="text" placeholder="United Nations" class="form-control" required name="name" id="trip-name"/>
+        <p class="trip-form-header">Description about field trip</p>
+        <textarea type="textarea" class="form-control" required name="description" id="description"></textarea>
+        <div id="trip-submit-wrapper">
+          <button type="submit" class="btn btn-success" id="trip-btn">Add New Trip</button>
+          <div class="spinner-border text-primary" role="status" id="trip-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <% if (tripCreated) { %>
+          <div class="alert alert-success" id="new-trip-added-success" role="alert">
+            Trip record successfully added! 
+          </div>
+        <% } %>
+        <% if (error) { %>
+          <div class="alert alert-danger" id="new-trip-added-error" role="alert">
+            Oops! Either a WiFi or server-side error occurred; try again soon. 
+          </div>
+        <% } %>
+      </form>
+    </div>
+
+    <div id="current-trips">
+      <div id="remove-trip-text-wrapper">
+        <% if (trips.length === 0) { %>
+          <p id="current-trips-header">When you have added a trip, it will be displayed below.</p>
+        <% } %>
+        <% if (trips.length > 0) { %>
+            <p id="current-trips-header">Click 'remove' to remove a speaker from the speaker section of our website.</p>
+        <% } %>
+        <div class="spinner-border text-primary" role="status" id="remove-trip-spinner">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="alert alert-success" id="trip-removed-success" role="alert">
+        Trip successfully removed!
+      </div>
+      <div class="alert alert-danger" id="trip-removed-error" role="alert">
+        Oops! Either a WiFi or server-side error occurred; try again soon. 
+      </div>
+      <% for (let i = 0; i < trips.length; i++) { %>
+        <div class="trip">
+          <div class="alert alert-primary" role="alert">
+            <%= trips[i].name + " | " + trips[i].date %>
+          </div>
+          <button type="button" class="btn btn-danger remove-trip-btn"  data-toggle="modal" data-target="#exampleModal" id=<%= trips[i]._id %>>Remove</button>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>
+
+

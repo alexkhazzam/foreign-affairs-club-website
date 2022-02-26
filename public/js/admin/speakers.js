@@ -1,54 +1,56 @@
 const speakerSpinner = document.getElementById('speaker-spinner');
-const speakerName = document.getElementById('speaker-name');
-const speakerDescription = document.getElementById('description');
-const speakerDate = document.getElementById('date');
 const newSpeakerAddedSuccess = document.getElementById(
   'new-speaker-added-success'
 );
 const newSpeakerAddedError = document.getElementById('new-speaker-added-error');
-
-const submitNewGuestSpeaker = () => {
-  speakerSpinner.style.display = 'block';
-
-  if (newSpeakerAddedError.style.display === 'block')
-    newSpeakerAddedError.style.display = 'none';
-
-  if (newSpeakerAddedSuccess.style.display === 'block')
-    newSpeakerAddedSuccess.style.display = 'none';
-
-  fetch('/admin/speakers', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      date: speakerDate.value.trim(),
-      name: speakerName.value.trim(),
-      description: speakerDescription.value.trim(),
-    }),
-  })
-    .then(response => {
-      if (response.status === 200) {
-        newSpeakerAddedSuccess.style.display = 'block';
-      } else newSpeakerAddedError.style.display = 'block';
-    })
-    .catch(_e => {
-      newSpeakerAddedError.style.display = 'block';
-    })
-    .finally(() => {
-      speakerSpinner.style.display = 'none';
-      speakerName.value = '';
-      speakerDescription.value = '';
-    });
-};
-
 const removeSpeakerBtns = document.querySelectorAll('.remove-speaker-btn');
 const currentYears = document.getElementById('current-speakers');
 const speakerRemovedSuccess = document.getElementById(
   'speaker-removed-success'
 );
+const invalidPassword = document.getElementById('invalid-password');
 const speakerRemovedError = document.getElementById('speaker-removed-error');
 const removeSpeakerSpinner = document.getElementById('remove-speaker-spinner');
+
+const showSpeakerSpinner = () => {
+  speakerSpinner.style.display = 'block';
+};
+
+const removeSpeakerBtn = document.getElementById('enter-password-btn');
+removeSpeakerBtn.addEventListener('click', () => {
+  showConfirmRemovedRecordSpinner();
+});
+
+let mainBtnClicked;
+
+const showConfirmRemovedRecordSpinner = () => {
+  if (invalidPassword.style.display === 'block')
+    invalidPassword.style.display = 'none';
+  const spinner = document.getElementById('confirm-remove-record-spinner');
+  const password = document.getElementById('password');
+  spinner.style.display = 'block';
+  fetch('/admin/session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ password: password.value }),
+  })
+    .then(res => {
+      if (res.status === 200) {
+        fetchData();
+      } else {
+        invalidPassword.style.display = 'block';
+      }
+    })
+    .catch(e => {
+      console.log(e);
+    })
+    .finally(() => {
+      spinner.style.display = 'none';
+      password.value = '';
+    });
+};
 
 removeSpeakerBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -58,30 +60,34 @@ removeSpeakerBtns.forEach(btn => {
     if (speakerRemovedError.style.display === 'block')
       speakerRemovedError.style.display = 'none';
 
-    removeSpeakerSpinner.style.display = 'block';
-
-    setTimeout(() => {
-      fetch('/admin/speakers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: btn.id }),
-      })
-        .then(response => {
-          if (response.status === 200) {
-            speakerRemovedSuccess.style.display = 'block';
-            currentYears.removeChild(btn.parentElement);
-          } else {
-            speakerRemovedError.style.display = 'block';
-          }
-        })
-        .catch(_e => {
-          speakerRemovedError.style.display = 'block';
-        })
-        .finally(() => {
-          removeSpeakerSpinner.style.display = 'none';
-        });
-    }, 1000);
+    mainBtnClicked = btn;
+    return;
   });
 });
+
+const fetchData = () => {
+  removeSpeakerSpinner.style.display = 'block';
+
+  fetch('/admin/speakers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: mainBtnClicked.id }),
+  })
+    .then(response => {
+      if (response.status === 200) {
+        speakerRemovedSuccess.style.display = 'block';
+        currentYears.removeChild(mainBtnClicked.parentElement);
+        document.querySelector('.close').click();
+      } else {
+        speakerRemovedError.style.display = 'block';
+      }
+    })
+    .catch(_e => {
+      speakerRemovedError.style.display = 'block';
+    })
+    .finally(() => {
+      removeSpeakerSpinner.style.display = 'none';
+    });
+};

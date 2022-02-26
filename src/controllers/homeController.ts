@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import SpeakerSchema from '../schema/Speaker';
+import SpeakerSchema from '../schema/SpeakerTrips';
 import YearSchema from '../schema/Year';
 
 const getHomepage = async (req: Request, res: Response): Promise<void> => {
