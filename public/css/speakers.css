@@ -106,7 +106,6 @@ hr {
 }
 
 .content {
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   border: 0.5px solid #fff;
   padding: 45px;
   color: #fff;
@@ -120,7 +119,7 @@ hr {
 }
 
 .icon-wrapper {
-  background-color: rgb(202, 182, 0);
+  background-color: #25b79f;
   border-radius: 50%;
   padding: 8px;
 }

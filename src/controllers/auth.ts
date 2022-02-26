@@ -7,7 +7,10 @@ import EmailConfirmationTokenSchema from '../schema/EmailConfirmationToken';
 import OfficerSchema from '../schema/Officer';
 
 const getLoginPage = (req: Request, res: Response) => {
-  res.render('auth/login.ejs');
+  res.render('auth/login.ejs', {
+    errorMessage: req.query.errorMessage || '',
+    invalid: req.query.invalid === 'yes',
+  });
 };
 
 const getRegisterPage = async (req: Request, res: Response) => {
@@ -19,7 +22,30 @@ const getRegisterPage = async (req: Request, res: Response) => {
   });
 };
 
-const postLoginPage = (req: Request, res: Response) => {};
+const postLoginPage = async (req: Request, res: Response) => {
+  const body = { ...req.body };
+
+  try {
+    const officer = await OfficerSchema.findOne({ email: body.email });
+
+    if (
+      officer &&
+      (await AdminSchema.findOne({ email: body.email })) &&
+      (await bcrypt.compare(body.password, officer.password))
+    ) {
+      req.session.client = officer;
+      console.log(req.session.client);
+      return res.redirect('/admin');
+    } else {
+      return res.redirect('/login/?errorMessage=Invalid credentials.');
+    }
+  } catch (e) {
+    console.log(e);
+    res.redirect(
+      '/login/?errorMessage=Oops! Something went wrong; try again later.'
+    );
+  }
+};
 
 const postRegisterPage = async (req: Request, res: Response) => {
   const parsedData = { ...req.body };
@@ -103,11 +129,8 @@ const postRegisterPage = async (req: Request, res: Response) => {
             : '',
         })
       ) {
-        req.session.client = await OfficerSchema.create(
-          req.session.tentativeClient
-        );
+        await OfficerSchema.create(req.session.tentativeClient);
         req.session.tentativeClient = {};
-        console.log(req.session.client);
         return res.redirect('/register/?accountCreated=yes');
       } else {
         return res.redirect('/register/?invalidToken=yes');

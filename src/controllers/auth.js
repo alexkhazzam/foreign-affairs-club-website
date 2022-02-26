@@ -10,7 +10,10 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const EmailConfirmationToken_1 = __importDefault(require("../schema/EmailConfirmationToken"));
 const Officer_1 = __importDefault(require("../schema/Officer"));
 const getLoginPage = (req, res) => {
-    res.render('auth/login.ejs');
+    res.render('auth/login.ejs', {
+        errorMessage: req.query.errorMessage || '',
+        invalid: req.query.invalid === 'yes',
+    });
 };
 const getRegisterPage = async (req, res) => {
     res.render('auth/register.ejs', {
@@ -20,7 +23,26 @@ const getRegisterPage = async (req, res) => {
         invalidToken: req.query.invalidToken === 'yes',
     });
 };
-const postLoginPage = (req, res) => { };
+const postLoginPage = async (req, res) => {
+    const body = { ...req.body };
+    try {
+        const officer = await Officer_1.default.findOne({ email: body.email });
+        if (officer &&
+            (await Admin_1.default.findOne({ email: body.email })) &&
+            (await bcrypt_1.default.compare(body.password, officer.password))) {
+            req.session.client = officer;
+            console.log(req.session.client);
+            return res.redirect('/admin');
+        }
+        else {
+            return res.redirect('/login/?errorMessage=Invalid credentials.');
+        }
+    }
+    catch (e) {
+        console.log(e);
+        res.redirect('/login/?errorMessage=Oops! Something went wrong; try again later.');
+    }
+};
 const postRegisterPage = async (req, res) => {
     const parsedData = { ...req.body };
     try {
@@ -86,9 +108,8 @@ const postRegisterPage = async (req, res) => {
                     ? req.session.tentativeClient.email
                     : '',
             })) {
-                req.session.client = await Officer_1.default.create(req.session.tentativeClient);
+                await Officer_1.default.create(req.session.tentativeClient);
                 req.session.tentativeClient = {};
-                console.log(req.session.client);
                 return res.redirect('/register/?accountCreated=yes');
             }
             else {

@@ -6,9 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Speaker_1 = __importDefault(require("../schema/Speaker"));
 const Year_1 = __importDefault(require("../schema/Year"));
 const getHomepage = async (req, res) => {
-    console.log('base url: ' + req.baseUrl);
-    console.log('base url: ' + req.url);
-    console.log(req.headers.location);
     res.render('home', {
         years: await Year_1.default.find(),
         speakers: (await Speaker_1.default.find()).reverse(),
