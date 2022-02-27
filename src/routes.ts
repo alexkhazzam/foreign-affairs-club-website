@@ -7,8 +7,7 @@ import adminController from './controllers/admin/adminController';
 import authController from './controllers/auth';
 
 const adminMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  //   req.session.client ? next() : res.redirect('/');
-  next();
+  req.session.hasOwnProperty('client') ? next() : res.redirect('/');
 };
 
 Router.get('/', homeController.getHomepage);

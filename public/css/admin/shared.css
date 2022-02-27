@@ -20,3 +20,11 @@
 .alert {
   border-radius: 0px !important;
 }
+
+#copyright {
+  bottom: 10px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: black;
+}

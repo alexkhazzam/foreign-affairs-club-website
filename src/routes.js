@@ -10,8 +10,7 @@ const memberController_1 = __importDefault(require("./controllers/memberControll
 const adminController_1 = __importDefault(require("./controllers/admin/adminController"));
 const auth_1 = __importDefault(require("./controllers/auth"));
 const adminMiddleware = (req, res, next) => {
-    //   req.session.client ? next() : res.redirect('/');
-    next();
+    req.session.hasOwnProperty('client') ? next() : res.redirect('/');
 };
 Router.get('/', homeController_1.default.getHomepage);
 Router.get('/members', memberController_1.default.getMemberPage);
