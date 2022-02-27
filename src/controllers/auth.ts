@@ -27,7 +27,7 @@ const postLoginPage = async (req: Request, res: Response) => {
 
   try {
     const officer = await OfficerSchema.findOne({ email: body.email });
-
+    console.log(officer);
     if (
       officer &&
       (await AdminSchema.findOne({ email: body.email })) &&

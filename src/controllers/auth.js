@@ -27,6 +27,7 @@ const postLoginPage = async (req, res) => {
     const body = { ...req.body };
     try {
         const officer = await Officer_1.default.findOne({ email: body.email });
+        console.log(officer);
         if (officer &&
             (await Admin_1.default.findOne({ email: body.email })) &&
             (await bcrypt_1.default.compare(body.password, officer.password))) {
