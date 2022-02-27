@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import YearSchema from '../../schema/Year';
 import bcrypt from 'bcrypt';
 import SpeakerTrips from '../../schema/SpeakerTrips';
+import AdminSchema from '../../schema/Admin';
+import OfficerSchema from '../../schema/Officer';
 
 const getHomepage = (req: Request, res: Response) => {
   res.render('./admin/home', {});
@@ -20,28 +22,43 @@ const getMemberPage = async (req: Request, res: Response): Promise<void> => {
 };
 
 const postAdminSession = (req: Request, res: Response) => {
-  try {
-    let data: string = '';
-    req.on('data', (chunk: Buffer): void => {
-      data += chunk;
-    });
-    req.on('end', async () => {
-      const parsedData = JSON.parse(data);
-      console.log(parsedData.password);
-      console.log(req.session.client.password);
-      if (
-        await bcrypt.compare(
-          parsedData.password.trim(),
-          req.session.client.password
-        )
-      ) {
-        res.status(200).send();
-      } else {
-        res.status(500).send();
-      }
-    });
-  } catch (e) {
-    res.status(500).send();
+  const body = { ...req.body };
+  if (body.hasOwnProperty('email') && req.session.client) {
+    if (req.session.client.adminAccess === 'top-level') {
+      AdminSchema.create({ email: body.email })
+        .then(() => {
+          res.redirect('/admin/settings/?emailAdded=yes');
+        })
+        .catch(e => {
+          res.redirect('/admin/settings/?error=yes');
+        });
+    } else {
+      res.redirect('/admin/settings/?notAuthorized=yes');
+    }
+  } else {
+    try {
+      let data: string = '';
+      req.on('data', (chunk: Buffer): void => {
+        data += chunk;
+      });
+      req.on('end', async () => {
+        const parsedData = JSON.parse(data);
+        if (parsedData.hasOwnProperty('password')) {
+          if (
+            await bcrypt.compare(
+              parsedData.password.trim(),
+              req.session.client.password
+            )
+          ) {
+            res.status(200).send();
+          } else {
+            res.status(500).send();
+          }
+        }
+      });
+    } catch (e) {
+      res.status(500).send();
+    }
   }
 };
 
@@ -181,8 +198,17 @@ const postTripsPage = async (req: Request, res: Response) => {
   }
 };
 
-const getMiscPage = (req: Request, res: Response) => {
-  res.render('./admin/misc', {});
+const getSettingsPage = async (req: Request, res: Response) => {
+  res.render('admin/settings', {
+    admins: await OfficerSchema.find(),
+    emailAdded: req.query.emailAdded === 'yes',
+    notAuthorized: req.query.notAuthorized === 'yes',
+    error: req.query.error === 'yes',
+  });
+};
+
+const postSettingsPage = (req: Request, res: Response) => {
+  res.render('admin/settings', {});
 };
 
 export default {
@@ -194,5 +220,6 @@ export default {
   postSpeakersPage,
   getTripsPage,
   postTripsPage,
-  getMiscPage,
+  getSettingsPage,
+  postSettingsPage,
 };

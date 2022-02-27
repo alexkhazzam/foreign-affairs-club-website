@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members</title>
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <link rel="stylesheet" href="/css/admin/settings.css" />
+    <script src="/js/admin/settings.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="/admin">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/members">Members</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/speakers">Guest Speakers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/trips">Field Trips</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/admin/settings">Admin Settings</a>
+    </li>
+  </ul>
+  <div id="admins">
+      <div class="alert alert-primary" id="admin-table-notice" role="alert">
+        Admins will not be displayed in the below table until they have created an account.
+      </div>
+      <table class="table table-bordered table-responsive-sm">
+        <thead>
+          <tr>
+            <th scope="col">Admin First Name</th>
+            <th scope="col">Admin Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Admin Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < admins.length; i++) { %>
+            <tr>
+              <td><%= admins[i].firstName %></td>
+              <td><%= admins[i].lastName %></td>
+              <td><%= admins[i].email %></td>
+              <% if (admins[i].adminAccess === 'top-level') { %>
+                <td class="bg-warning"><%= admins[i].adminAccess %></td>
+              <% } %>
+              <% if (admins[i].adminAccess === 'entry-level') { %>
+                <td class="bg-info"><%= admins[i].adminAccess %></td>
+              <% } %>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <div id="admin-form">
+        <form action="/admin/session" method="POST">
+          <div class="alert alert-primary" role="alert">
+            Authorizing an email enables an individual to create an account with that email; it does not, however, add them to the above table.
+          </div>
+          <p id="authorize-admin-text">Authorize new admin email</p>
+          <input type="email" placeholder="Admin Email" class="form-control" required name="email" id="email"/>
+          <button type="submit" class="btn btn-success" id="authorize-btn">Authorize</button>
+          <% if (emailAdded) { %>
+            <div class="alert alert-success email-added-alert" role="alert">
+              Email authorized successfully!
+            </div>          
+          <% } %>
+          <% if (error) { %>
+            <div class="alert alert-danger email-added-alert" role="alert">
+              Oops! A WiFi or server-side error occurred; try again soon.
+            </div>          
+          <% } %>
+          <% if (notAuthorized) { %>
+            <div class="alert alert-danger email-added-alert" role="alert">
+              Only top-level admins can authorize new emails. 
+            </div>          
+          <% } %>
+        </form>
+      </div>
+      <div id="other-details">
+
+      </div>
+  </div>
+</body>
+</html>

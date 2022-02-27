@@ -1,0 +1,30 @@
+#admins {
+  margin: 0px !important;
+}
+
+#admin-table-notice {
+  margin-bottom: 0px;
+}
+
+#admin-form {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  width: 80%;
+  text-align: left;
+  margin: auto;
+  margin-top: 85px;
+}
+
+#authorize-admin-text {
+  margin: 0px;
+}
+
+#authorize-btn {
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.email-added-alert {
+  margin-top: 10px;
+  margin-bottom: 0px !important;
+}

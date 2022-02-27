@@ -16,3 +16,7 @@
   border-top: none !important;
   border-bottom: none !important;
 }
+
+.alert {
+  border-radius: 0px !important;
+}
