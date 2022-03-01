@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SpeakerTrips_1 = __importDefault(require("../schema/SpeakerTrips"));
 const Year_1 = __importDefault(require("../schema/Year"));
 const getHomepage = async (req, res) => {
+    if (!req.session.visitor) {
+        req.session.visitor = { user: 'unknown' };
+        return res.redirect('https://nhsforeignaffairs.herokuapp.com');
+    }
     res.render('home', {
         years: await Year_1.default.find(),
         speakers: (await SpeakerTrips_1.default.find()).reverse(),
