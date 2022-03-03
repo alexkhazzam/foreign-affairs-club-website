@@ -194,6 +194,8 @@ const getSettingsPage = async (req, res) => {
         notAuthorized: req.query.notAuthorized === 'yes',
         error: req.query.error === 'yes',
         pings: (await Pings_1.default.find())[0].totalPings.toString(),
+        username: process.env.NODEMAILER_USER,
+        password: process.env.NODEMAILER_PASS,
     });
 };
 const postSettingsPage = (req, res) => {

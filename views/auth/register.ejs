@@ -37,7 +37,10 @@
                     </div>
                     <% } %>
                 <% if (tokenSent || invalidToken) { %>
-                    <p class="register-form-header">Enter Token</p>
+                    <div class="alert alert-warning" role="alert">
+                        A token has been sent to your email. Enter it below to verify your account. Note: tokens expire after 2 minutes; if your token becomes invalidated, <a href="https://nhsforeignaffairs.herokuapp.com/register">Register</a> again.  
+                    </div>
+                    <p class="register-form-header" style="margin-bottom: 10px;">Enter Email Confirmation Token</p>
                     <input type="text" class="form-control" id="token" required name="token" placeholder="123456"/>
                 <% } %>
                 <% if (!accountCreated) { %>

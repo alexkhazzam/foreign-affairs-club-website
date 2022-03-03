@@ -212,6 +212,8 @@ const getSettingsPage = async (req: Request, res: Response) => {
     notAuthorized: req.query.notAuthorized === 'yes',
     error: req.query.error === 'yes',
     pings: (await PingSchema.find())[0].totalPings.toString(),
+    username: process.env.NODEMAILER_USER,
+    password: process.env.NODEMAILER_PASS,
   });
 };
 

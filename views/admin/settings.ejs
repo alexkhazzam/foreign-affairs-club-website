@@ -29,7 +29,9 @@
     </li>
   </ul>
   <div id="admins">
-      <h5 id="total-pings">Total Website Pings: <%= pings %></h5>
+      <h5 style="margin-bottom: 20px;">Want anything on the website updated? Email <span style="font-weight: bold;">alexanderkhazzam@gmail.com</span></h5>
+      <h5 style="margin-bottom: 20px;">Last website update: <span style="font-weight: bold;">Match 3, 2022</span></h5>
+      <h5 id="total-pings">Total Website Pings: <span style="font-weight: bold;"><%= pings %></span></h5>
       <div class="alert alert-primary" id="admin-table-notice" role="alert">
         Admins will not be displayed in the below table until they have created an account.
       </div>
@@ -61,14 +63,14 @@
       <div id="admin-form">
         <form action="/admin/session" method="POST">
           <div class="alert alert-primary" role="alert">
-            Authorizing an email enables an individual to create an account with that email; it does not, however, add them to the above table.
+            Authorizing an email enables an individual to create an account with that email; it does not, however, add them to the above table. Emails should be school emails to ensure that once members graduate, they no longer have access to their school email accounts, and by extension, this admin portal. Exceptions can be made, however. 
           </div>
           <p id="authorize-admin-text">Authorize new admin email</p>
           <input type="email" placeholder="Admin Email" class="form-control" required name="email" id="email"/>
           <button type="submit" class="btn btn-success" id="authorize-btn">Authorize</button>
           <% if (emailAdded) { %>
             <div class="alert alert-success email-added-alert" role="alert">
-              Email authorized successfully!
+              Email authorized successfully! The recipient should be receiving an invite link in the next few seconds.
             </div>          
           <% } %>
           <% if (error) { %>
@@ -82,6 +84,13 @@
             </div>          
           <% } %>
         </form>
+      </div>
+      <div id="credentials">
+        <div class="alert alert-primary" role="alert">
+          Gmail Account Credentials. Do not share these with anyone who is not an officer.
+        </div>
+        <p class="credential">Username: <span><%= username %></span></p>
+        <p class="credential">Password: <span><%= password %></span></p>
       </div>
   </div>
 </body>
