@@ -5,6 +5,7 @@ import SpeakerTrips from '../../schema/SpeakerTrips';
 import AdminSchema from '../../schema/Admin';
 import OfficerSchema from '../../schema/Officer';
 import PingSchema from '../../schema/Pings';
+import email from '../../helpers/email';
 
 const getHomepage = (req: Request, res: Response) => {
   res.render('./admin/home', {});
@@ -27,7 +28,12 @@ const postAdminSession = (req: Request, res: Response) => {
   if (body.hasOwnProperty('email') && req.session.client) {
     if (req.session.client.adminAccess === 'top-level') {
       AdminSchema.create({ email: body.email })
-        .then(() => {
+        .then(async () => {
+          await email(
+            body.email,
+            'Email Authorized',
+            'You have been invited to become an admin of the Foreign Affairs Club website. Register at https://nhsforeignaffairs.herokuapp.com/register with your school email and login at href="https://nhsforeignaffairs.herokuapp.com/login'
+          );
           res.redirect('/admin/settings/?emailAdded=yes');
         })
         .catch(e => {

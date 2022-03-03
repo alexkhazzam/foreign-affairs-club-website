@@ -9,6 +9,7 @@ const SpeakerTrips_1 = __importDefault(require("../../schema/SpeakerTrips"));
 const Admin_1 = __importDefault(require("../../schema/Admin"));
 const Officer_1 = __importDefault(require("../../schema/Officer"));
 const Pings_1 = __importDefault(require("../../schema/Pings"));
+const email_1 = __importDefault(require("../../helpers/email"));
 const getHomepage = (req, res) => {
     res.render('./admin/home', {});
 };
@@ -28,7 +29,8 @@ const postAdminSession = (req, res) => {
     if (body.hasOwnProperty('email') && req.session.client) {
         if (req.session.client.adminAccess === 'top-level') {
             Admin_1.default.create({ email: body.email })
-                .then(() => {
+                .then(async () => {
+                await (0, email_1.default)(body.email, 'Email Authorized', 'You have been invited to become an admin of the Foreign Affairs Club website. Register at https://nhsforeignaffairs.herokuapp.com/register with your school email and login at href="https://nhsforeignaffairs.herokuapp.com/login');
                 res.redirect('/admin/settings/?emailAdded=yes');
             })
                 .catch(e => {

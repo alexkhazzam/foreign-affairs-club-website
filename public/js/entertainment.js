@@ -15,22 +15,43 @@ btns.forEach(btn => {
   });
 });
 
-const fetchCountry = country => {
-  fetch('https://ajayakv-rest-countries-v1.p.rapidapi.com/rest/v1/all', {
+const fetchCountry = () => {
+  const country = document.getElementById('country-data-input');
+  const APIResults = document.getElementById('api-results');
+  const enterValueAlert = document.getElementById('value-alert');
+  const notFoundAlert = document.getElementById('not-found');
+  const APIError = document.getElementById('api-error');
+
+  if (APIError.style.display === 'block') {
+    APIError.style.display = 'none';
+  }
+
+  if (notFoundAlert.style.display === 'block') {
+    notFoundAlert.style.display = 'none';
+  }
+
+  if (country.value.trim() === '') {
+    APIResults.innerHTML = '';
+    return (enterValueAlert.style.display = 'block');
+  } else {
+    enterValueAlert.style.display = 'none';
+  }
+
+  fetch(`https://restcountries.com/v3.1/name/${country.value.trim()}`, {
     method: 'GET',
-    headers: {
-      'x-rapidapi-key': '5cdb349f57msh8bb01b1b9916332p117422jsn5892b9abe38d',
-      'x-rapidapi-host': 'ajayakv-rest-countries-v1.p.rapidapi.com',
-    },
   })
     .then(res => {
       return res.json();
     })
     .then(data => {
-      console.log(data);
+      if (data.hasOwnProperty('status') && data.status === 404) {
+        APIError.style.display = 'block';
+      } else {
+        console.log(data);
+      }
     })
     .catch(e => {
-      console.log(e);
+      APIError.style.display = 'block';
     });
 };
 

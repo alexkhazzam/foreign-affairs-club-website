@@ -57,17 +57,23 @@ const postRegisterPage = async (req, res) => {
             }
             else if (!(await Admin_1.default.findOne({ email: parsedData.email }))) {
                 return res.redirect(`/register/?errorMessage=Email not authorized.`);
-            }
-            else if (parsedData.email.charAt(0).toUpperCase() !==
-                parsedData.firstName.charAt(0).toUpperCase()) {
-                return res.redirect(`/register/?errorMessage=Enter your real first name.`);
-            }
-            else if (parsedData.email
-                .split('@')[0]
-                .substring(1)
-                .slice(0, -1)
-                .toUpperCase() !== parsedData.lastName.toUpperCase()) {
-                return res.redirect(`/register/?errorMessage=Enter your real last name.`);
+                // } else if (
+                //   parsedData.email.charAt(0).toUpperCase() !==
+                //   parsedData.firstName.charAt(0).toUpperCase()
+                // ) {
+                //   return res.redirect(
+                //     `/register/?errorMessage=Enter your real first name.`
+                //   );
+                // } else if (
+                //   parsedData.email
+                //     .split('@')[0]
+                //     .substring(1)
+                //     .slice(0, -1)
+                //     .toUpperCase() !== parsedData.lastName.toUpperCase()
+                // ) {
+                //   return res.redirect(
+                //     `/register/?errorMessage=Enter your real last name.`
+                //   );
             }
             else if (parsedData.pass1 !== parsedData.pass2) {
                 return res.redirect(`/register/?errorMessage=Passwords must match.`);

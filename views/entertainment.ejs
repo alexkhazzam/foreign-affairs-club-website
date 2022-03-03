@@ -26,8 +26,8 @@
       <div id="country" class="entertainment-input-wrapper">
         <p class="api-info-text">Get data on any country</p>
         <div class="search-wrapper">
-          <input type="text" placeholder="Country Name" class="form-control entertainment-input" required />c
-          <button type="button" class="btn btn-success api-search-btn">Search</button>
+          <input type="text" placeholder="Country Name" class="form-control entertainment-input" required id="country-data-input"/>
+          <button type="button" class="btn btn-success api-search-btn" onclick="fetchCountry()">Search</button>
         </div>
       </div>
       <div id="movie" class="entertainment-input-wrapper">
@@ -47,7 +47,7 @@
         
       </p>
       <p id="api-error" role="alert">
-        Oops! An error occurred; try again later.
+        Oops! An error occurred; please try again later.
       </p>
       <div id="api-results">
 
