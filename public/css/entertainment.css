@@ -19,6 +19,14 @@
   border-radius: 0px !important;
 }
 
+#value-alert,
+#not-found,
+#api-error {
+  margin-top: 10px;
+  display: none;
+  color: maroon;
+}
+
 #api-display-screen {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #fff !important;
@@ -43,7 +51,6 @@
 .search-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 45px;
 }
 
 #covid-spinner,
@@ -71,6 +78,7 @@
 
 #api-results {
   width: 100%;
+  margin-top: 45px;
 }
 
 .result-wrapper {
