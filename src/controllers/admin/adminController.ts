@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import SpeakerTrips from '../../schema/SpeakerTrips';
 import AdminSchema from '../../schema/Admin';
 import OfficerSchema from '../../schema/Officer';
+import PingSchema from '../../schema/Pings';
 
 const getHomepage = (req: Request, res: Response) => {
   res.render('./admin/home', {});
@@ -204,6 +205,7 @@ const getSettingsPage = async (req: Request, res: Response) => {
     emailAdded: req.query.emailAdded === 'yes',
     notAuthorized: req.query.notAuthorized === 'yes',
     error: req.query.error === 'yes',
+    pings: (await PingSchema.find())[0].totalPings.toString(),
   });
 };
 

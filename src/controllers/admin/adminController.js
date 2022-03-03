@@ -8,6 +8,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const SpeakerTrips_1 = __importDefault(require("../../schema/SpeakerTrips"));
 const Admin_1 = __importDefault(require("../../schema/Admin"));
 const Officer_1 = __importDefault(require("../../schema/Officer"));
+const Pings_1 = __importDefault(require("../../schema/Pings"));
 const getHomepage = (req, res) => {
     res.render('./admin/home', {});
 };
@@ -190,6 +191,7 @@ const getSettingsPage = async (req, res) => {
         emailAdded: req.query.emailAdded === 'yes',
         notAuthorized: req.query.notAuthorized === 'yes',
         error: req.query.error === 'yes',
+        pings: (await Pings_1.default.find())[0].totalPings.toString(),
     });
 };
 const postSettingsPage = (req, res) => {

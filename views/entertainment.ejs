@@ -1,30 +1,47 @@
 <link rel="stylesheet" href="/css/entertainment.css">
 <script src="/js/entertainment.js" defer></script>
 <div id="entertainment">
-    <ul class="nav" id="entertainment-tabs">
-        <li class="nav-item">
-          <a class="nav-link active">COVID</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Countries</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Movies</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-    </ul>
+  <div id="entertainment-btns">
+    <div>
+      <button type="button" class="btn btn-dark entertainment-btn" id="covid-btn">COVID</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-dark entertainment-btn" id="country-btn">Countries</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-dark entertainment-btn" id="movie-btn">Movies</button>
+    </div>
+  </div>
+  <div id="api-display-screen">
+      <div id="covid" class="entertainment-input-wrapper">
+        <p class="api-info-text">Get COVID data on any country</p>
+        <div class="search-wrapper">
+          <input type="text" placeholder="Country Name" class="form-control entertainment-input" required id="covid-country-input"/>
+          <button type="button" class="btn btn-success api-search-btn" onclick="fetchCOVID()">Search</button>
+          <div class="spinner-border text-dark" role="status" id="covid-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div id="country" class="entertainment-input-wrapper">
+        <p class="api-info-text">Get data on any country</p>
+        <div class="search-wrapper">
+          <input type="text" placeholder="Country Name" class="form-control entertainment-input" required />
+          <button type="button" class="btn btn-success api-search-btn">Search</button>
+        </div>
+      </div>
+      <div id="movie" class="entertainment-input-wrapper">
+        <p class="api-info-text">Get information on any show or movie in existence</p>
+        <div class="search-wrapper">
+          <input type="text" placeholder="Movie/Show Name" class="form-control entertainment-input" required id="movie-input"/>
+          <button type="button" class="btn btn-success api-search-btn" onclick="fetchMovies()">Search</button>
+          <div class="spinner-border text-dark" role="status" id="movie-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div id="api-results">
+
+      </div>
+  </div>
 </div>
-movies // `https://www.omdbapi.com/?&t=${req.body.movie}&apikey=78628677`
-var request = unirest(
-    'GET',
-    'https://ajayakv-rest-countries-v1.p.rapidapi.com/rest/v1/all'
-  );
-
-  request.headers({
-    'x-rapidapi-key': '5cdb349f57msh8bb01b1b9916332p117422jsn5892b9abe38d',
-    'x-rapidapi-host': 'ajayakv-rest-countries-v1.p.rapidapi.com'
-
-
-    https://api.covid19api.com/summary
