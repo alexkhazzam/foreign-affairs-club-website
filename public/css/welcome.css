@@ -6,14 +6,15 @@
   height: 100vh;
 }
 
-#welcome-text-wrapper {
+/* #welcome-text-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   text-align: center;
-}
+} */
 
+/* 
 #welcome-text,
 #welcome-text-cursor {
   color: #fff;
@@ -107,4 +108,4 @@
   100% {
     background-position: 250px 0, 250px 0, 100px 0;
   }
-}
+} */

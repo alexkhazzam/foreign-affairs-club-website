@@ -25,12 +25,15 @@
           <a class="nav-link active" href="/admin/trips">Field Trips</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/admin/resources">Resources</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/admin/settings">Admin Settings</a>
         </li>
     </ul>
     <%- include('./modal.ejs') %> 
     <div id="trips">
-      <p>Upon completing the below form, a new guest speaker will be added to the guest speaker and field trip section of our website.</p>
+      <p>Upon completing the below form, a new field trip will be added to the guest speaker and field trip section of our website.</p>
       <form action="/admin/trips" method="POST" onsubmit="showTripSpinner()">
         <p class="trip-form-header">Date</p>
         <input type="text" placeholder="month day, year" class="form-control" required name="date" id="date"/>

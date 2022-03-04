@@ -3,7 +3,9 @@
 #speaker,
 #current-speakers,
 #current-trips,
-#trips {
+#current-resources,
+#trips,
+#resources {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 20px;
   width: 80%;
@@ -12,20 +14,23 @@
   margin-bottom: 50px;
 }
 
-#school-year-warning {
+#school-year-warning,
+#resource-warning {
   margin-top: 20px !important;
 }
 
 #school-year-spinner,
 #speaker-spinner,
-#trip-spinner {
+#trip-spinner,
+#resource-spinner {
   display: none;
   margin-left: 10px;
 }
 
 #school-year-submit-wrapper,
 #speaker-submit-wrapper,
-#trip-submit-wrapper {
+#trip-submit-wrapper,
+#resource-submit-wrapper {
   display: flex;
   margin-top: 30px;
   align-items: center;
@@ -41,13 +46,16 @@
 #new-year-added-success,
 #new-year-added-error,
 #new-speaker-added-success,
-#new-speaker-added-error {
+#new-speaker-added-error,
+#new-resource-added-success,
+#new-resource-added-error {
   margin-top: 30px !important;
 }
 
 #remove-school-year-text-wrapper,
 #remove-speaker-text-wrapper,
-#remove-trip-text-wrapper {
+#remove-trip-text-wrapper,
+#remove-resource-text-wrapper {
   display: flex;
   align-items: center;
 }
@@ -55,11 +63,14 @@
 #remove-school-year-spinner,
 #new-year-removed-success,
 #new-year-removed-error,
+#remove-resource-spinner,
 #remove-speaker-spinner,
 #speaker-removed-success,
 #speaker-removed-error,
 #trip-removed-success,
 #trip-removed-error,
+#new-resource-removed-success,
+#new-resource-removed-error,
 #remove-trip-spinner {
   display: none;
 }
@@ -73,14 +84,16 @@
 
 #current-years-header,
 #current-speakers-header,
-#current-trips-header {
+#current-trips-header,
+#current-resources-header {
   margin: 0px;
   margin-right: 10px;
 }
 
 .school-year-form-header,
 .speaker-form-header,
-.trip-form-header {
+.trip-form-header,
+.resource-form-header {
   margin-top: 10px;
   margin-bottom: 2px;
 }
@@ -100,7 +113,8 @@
 
 .remove-year-btn,
 .remove-speaker-btn,
-.remove-trip-btn {
+.remove-trip-btn,
+.remove-resource-btn {
   height: 50px;
   border-radius: 0px !important;
 }

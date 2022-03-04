@@ -1,0 +1,46 @@
+#contact {
+  background-color: white;
+  padding: 5%;
+  margin-bottom: 150px;
+}
+
+#contact-header {
+  margin-top: 250px;
+  color: #25b79f;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#error-alert,
+#bad-words-alert,
+#success-alert {
+  display: none;
+  margin-top: 20px;
+}
+
+.contact-input {
+  margin: auto;
+  margin: 0px;
+  border-radius: 0px !important;
+  margin-bottom: 10px;
+}
+
+.contact-form-header {
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+#submit-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.send-email-btn {
+  background-color: #25b79f !important;
+  margin-right: 10px;
+}
+
+#contact-spinner {
+  display: none;
+}

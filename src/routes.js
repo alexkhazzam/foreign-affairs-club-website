@@ -9,6 +9,7 @@ const homeController_1 = __importDefault(require("./controllers/homeController")
 const memberController_1 = __importDefault(require("./controllers/memberController"));
 const adminController_1 = __importDefault(require("./controllers/admin/adminController"));
 const auth_1 = __importDefault(require("./controllers/auth"));
+const contactController_1 = __importDefault(require("./controllers/contactController"));
 const adminMiddleware = (req, res, next) => {
     req.session.hasOwnProperty('client') ? next() : res.redirect('/');
 };
@@ -24,8 +25,11 @@ Router.post('/admin/trips', adminMiddleware, adminController_1.default.postTrips
 Router.post('/admin/session', adminMiddleware, adminController_1.default.postAdminSession);
 Router.get('/admin/settings', adminMiddleware, adminController_1.default.getSettingsPage);
 Router.post('/admin/settings', adminMiddleware, adminController_1.default.postSettingsPage);
+Router.get('/admin/resources', adminMiddleware, adminController_1.default.getResourcesPage);
+Router.post('/admin/resources', adminMiddleware, adminController_1.default.postResourcesPage);
 Router.get('/register', auth_1.default.getRegisterPage);
 Router.post('/register', auth_1.default.postRegisterPage);
 Router.get('/login', auth_1.default.getLoginPage);
 Router.post('/login', auth_1.default.postLoginPage);
+Router.post('/contact', contactController_1.default.postContactPage);
 exports.default = Router;

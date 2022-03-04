@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/resources.css">
+<script src="/js/resources.js" defer></script>
+<% if (resources.length > 0) { %>
+    <h2 id="resources-header">Resources</h2>
+    <div id="resources">
+        <% for (let i = 0; i < resources.length; i++) { %>
+            <div class="jumbotron">
+                <h1 class="display-4"><%= resources[i].title %></h1>
+                <p class="lead"><%= resources[i].type %></p>
+                <p style="color: white;"><%= resources[i].date %></p>
+                <hr class="my-4">
+                <a href="<%= resources[i].link %>" target="_blank">
+                    <button class="btn btn-success resource-btn">
+                        Visit Resource
+                    </button>
+                </a>
+            </div> 
+        <% } %>
+    </div>
+<% } %>

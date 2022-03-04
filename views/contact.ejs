@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/contact.css">
+<script src="/js/contact.js" defer></script>
+<h2 id="contact-header">Contact</h2>
+<div id="contact">
+    <form onsubmit="event.preventDefault()">
+        <p class="contact-form-header">Email Address</p>
+        <input type="email" class="form-control contact-input" required placeholder="example@gmail.com" id="email"/>
+        <p class="contact-form-header">Full Name</p>
+        <input type="text" class="form-control contact-input" required placeholder="John Smith" id="name"/>
+        <p class="contact-form-header">Subject</p>
+        <input type="text" class="form-control contact-input" required placeholder="Subject" id="subject"/>
+        <p class="contact-form-header">Message</p>
+        <textarea type="textarea" class="form-control contact-input" placeholder="Message" required id="message"></textarea>
+        <div id="submit-wrapper">
+            <button type="submit" class="btn btn-success send-email-btn" onclick="sendEmail()">Send</button>
+            <div class="spinner-border text-success" role="status" id="contact-spinner">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="alert alert-danger" id="error-alert" role="alert">
+            Oops! An error occurred; try again later.
+        </div>
+        <div class="alert alert-danger" id="bad-words-alert" role="alert">
+            Profanity detcted. Email will not send!
+        </div>
+        <div class="alert alert-success" id="success-alert" role="alert">
+            Email was successfully sent! Average response time: 1 hour. 
+        </div>
+    </form>
+</div>

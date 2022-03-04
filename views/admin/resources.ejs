@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link rel="stylesheet" href="/css/admin/members-speakers-trips/shared.css" />
+    <link rel="stylesheet" href="/css/admin/shared.css" />
+    <script src="/js/admin/resources.js" defer></script>
+    <%- include('../includes/bootstrap.ejs') %>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/members">Members</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/speakers">Guest Speakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/trips">Field Trips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/resources">Resources</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/settings">Admin Settings</a>
+        </li>
+    </ul> 
+    <%- include('./modal.ejs') %>
+    <div id="resources">
+      <p>Upon completing the below form, a new resource will be added to the resources section of our website.</p>
+      <div class="alert alert-warning" role="alert" id="resource-warning">
+        Ensure that the resource link works. If you are attaching a shareable google slides/docs link, update the permission set to grant access to everyone who has the link. 
+      </div>
+      <form onsubmit="showResourceSpinner();" action="/admin/resources" method="POST">
+        <p class="resource-form-header">Resource Title</p>
+        <input type="text" placeholder="Russia-Ukraine War" class="form-control" required name="title"/>
+        <p class="resource-form-header">Resource Type (news article, google slide, google doc, etc)</p>
+        <input type="text" placeholder="Google Slide Presentation" class="form-control" required name="type"/>
+        <p class="resource-form-header">Resource Date</p>
+        <input type="text" placeholder="Month day, year" class="form-control" required name="date"/>
+        <p class="resource-form-header">Resource Link</p>
+        <input type="text" placeholder="https://example.com" class="form-control" required name="link"/>
+        <div id="resource-submit-wrapper">
+          <button type="submit" class="btn btn-success" id="resource-btn">Add New Resource</button>
+          <div class="spinner-border text-primary" role="status" id="resource-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <% if (resourceCreated) { %>
+          <div class="alert alert-success" id="new-resource-added-success" role="alert">
+            New resource added successfully!
+          </div>
+        <% } %>
+        <% if (error) { %>
+          <div class="alert alert-danger" id="new-resource-added-error" role="alert">
+            Oops! Either a WiFi or server-side error occurred; try again soon. 
+          </div>
+        <% } %>
+      </form>
+    </div>
+
+    <div id="current-resources">
+      <div id="remove-resource-text-wrapper">
+        <% if (resources.length === 0) { %>
+          <p id="current-resources-header">When you have added a resource, it will be displayed below.</p>
+          <% } %>
+          <% if (resources.length > 0) { %>
+            <p id="current-resources-header">Click 'remove' to remove a year from the members section of our website.</p>
+            <% } %>
+        <div class="spinner-border text-primary" role="status" id="remove-resource-spinner">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="alert alert-success" id="new-resource-removed-success" role="alert">
+        Resource successfully removed!
+      </div>
+      <div class="alert alert-danger" id="new-resource-removed-error" role="alert">
+        Oops! Either a WiFi or server-side error occurred; try again soon. 
+      </div>
+      <% for (let i = 0; i < resources.length; i++) { %>
+        <div class="year">
+          <div class="alert alert-primary" role="alert">
+            <%= resources[i].title %>
+          </div>
+          <button type="button" class="btn btn-danger remove-resource-btn" data-toggle="modal" data-target="#exampleModal" id=<%= resources[i]._id %> >Remove</button>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

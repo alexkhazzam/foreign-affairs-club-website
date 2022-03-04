@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import PingSchema from '../schema/Pings';
+import ResourceSchema from '../schema/Resource';
 import SpeakerSchema from '../schema/SpeakerTrips';
 import YearSchema from '../schema/Year';
 
@@ -14,9 +15,13 @@ const getHomepage = async (req: Request, res: Response): Promise<void> => {
     // return res.redirect('https://nhsforeignaffairs.herokuapp.com');
   }
 
+  (await ResourceSchema.find()).forEach(r => {
+    console.log(r.link);
+  });
   res.render('home', {
     years: await YearSchema.find(),
-    speakers: (await SpeakerSchema.find()).reverse()
+    speakers: (await SpeakerSchema.find()).reverse(),
+    resources: await ResourceSchema.find(),
   });
 };
 

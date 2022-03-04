@@ -19,6 +19,7 @@ const fetchCountry = () => {
   const country = document.getElementById('country-data-input');
   const APIResults = document.getElementById('api-results');
   const enterValueAlert = document.getElementById('value-alert');
+  const countrySpinner = document.getElementById('country-spinner');
   const notFoundAlert = document.getElementById('not-found');
   const APIError = document.getElementById('api-error');
 
@@ -37,6 +38,9 @@ const fetchCountry = () => {
     enterValueAlert.style.display = 'none';
   }
 
+  APIResults.innerHTML = '';
+  countrySpinner.style.visibility = 'visible';
+
   fetch(`https://restcountries.com/v3.1/name/${country.value.trim()}`, {
     method: 'GET',
   })
@@ -45,13 +49,27 @@ const fetchCountry = () => {
     })
     .then(data => {
       if (data.hasOwnProperty('status') && data.status === 404) {
-        APIError.style.display = 'block';
+        notFoundAlert.textContent = `Country not found!`;
+        notFoundAlert.style.display = 'block';
       } else {
-        console.log(data);
+        Object.entries(data[0]).forEach(([key, value]) => {
+          if (typeof value !== 'object') {
+            APIResults.innerHTML += `
+            <div class="result-wrapper">
+                <p class="result-key">${key}</p>
+                <p class="result-value">${value}</p>
+            </div>
+            `;
+          }
+        });
       }
     })
     .catch(e => {
       APIError.style.display = 'block';
+    })
+    .finally(() => {
+      country.value = '';
+      countrySpinner.style.visibility = 'hidden';
     });
 };
 
@@ -102,7 +120,7 @@ const fetchCOVID = () => {
             APIResults.innerHTML += `
               <div class="result-wrapper">
                   <p class="result-key">${key}</p>
-                  <p>${value}</p>
+                  <p class="result-value">${value}</p>
               </div>
               `;
           }
@@ -163,7 +181,7 @@ const fetchMovies = () => {
             APIResults.innerHTML += `
                   <div class="result-wrapper">
                       <p class="result-key">${key}</p>
-                      <p>${value}</p>
+                      <p class="result-value">${value}</p>
                   </div>
                   `;
           } else if (key === 'Poster') {

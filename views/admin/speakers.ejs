@@ -25,6 +25,9 @@
           <a class="nav-link" href="/admin/trips">Field Trips</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/admin/resources">Resources</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/admin/settings">Admin Settings</a>
         </li>
     </ul> 
@@ -33,7 +36,7 @@
       <p>Upon completing the below form, a new guest speaker will be added to the guest speaker and field trip section of our website.</p>
       <form onsubmit="showSpeakerSpinner()" action="/admin/speakers" method="POST">
         <p class="speaker-form-header">Date</p>
-        <input type="text" placeholder="month day, year" class="form-control" required name="date" id="date"/>
+        <input type="text" placeholder="Month day, year" class="form-control" required name="date" id="date"/>
         <p class="speaker-form-header">Speaker Name</p>
         <input type="text" placeholder="John Smith" class="form-control" required name="name" id="speaker-name"/>
         <p class="speaker-form-header">Description about speaker and/or what topics he or she discussed with the club.</p>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members</title>
+    <title>Admin Settings</title>
     <link rel="stylesheet" href="/css/admin/shared.css" />
     <link rel="stylesheet" href="/css/admin/settings.css" />
     <script src="/js/admin/settings.js" defer></script>
@@ -25,13 +25,16 @@
       <a class="nav-link" href="/admin/trips">Field Trips</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="/admin/resources">Resources</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link active" href="/admin/settings">Admin Settings</a>
     </li>
   </ul>
   <div id="admins">
-      <h5 style="margin-bottom: 20px;">Want anything on the website updated? Email <span style="font-weight: bold;">alexanderkhazzam@gmail.com</span></h5>
-      <h5 style="margin-bottom: 20px;">Last website update: <span style="font-weight: bold;">Match 3, 2022</span></h5>
-      <h5 id="total-pings">Total Website Pings: <span style="font-weight: bold;"><%= pings %></span></h5>
+      <h6 style="margin-bottom: 20px;">Want anything on the website updated? Email <span style="font-weight: bold;">alexanderkhazzam@gmail.com</span></h6>
+      <h6 style="margin-bottom: 20px;">Last website update: <span style="font-weight: bold;">Match 3, 2022</span></h6>
+      <h6 id="total-pings">Total Website Pings: <span style="font-weight: bold;"><%= pings %></span></h6>
       <div class="alert alert-primary" id="admin-table-notice" role="alert">
         Admins will not be displayed in the below table until they have created an account.
       </div>
@@ -62,7 +65,7 @@
       </table>
       <div id="admin-form">
         <form action="/admin/session" method="POST">
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-warning" role="alert">
             Authorizing an email enables an individual to create an account with that email; it does not, however, add them to the above table. Emails should be school emails to ensure that once members graduate, they no longer have access to their school email accounts, and by extension, this admin portal. Exceptions can be made, however. 
           </div>
           <p id="authorize-admin-text">Authorize new admin email</p>

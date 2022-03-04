@@ -6,6 +6,7 @@ import AdminSchema from '../../schema/Admin';
 import OfficerSchema from '../../schema/Officer';
 import PingSchema from '../../schema/Pings';
 import email from '../../helpers/email';
+import ResourceSchema from '../../schema/Resource';
 
 const getHomepage = (req: Request, res: Response) => {
   res.render('./admin/home', {});
@@ -221,6 +222,53 @@ const postSettingsPage = (req: Request, res: Response) => {
   res.render('admin/settings', {});
 };
 
+const getResourcesPage = async (req: Request, res: Response) => {
+  res.render('admin/resources', {
+    resources: (await ResourceSchema.find()).map(resource => {
+      resource._id = resource._id.toString();
+      return resource;
+    }),
+    error: req.query.error === 'yes',
+    resourceCreated: req.query.resourceCreated === 'yes',
+  });
+};
+
+const postResourcesPage = (req: Request, res: Response) => {
+  const body = { ...req.body };
+
+  if (
+    body.hasOwnProperty('title') &&
+    body.hasOwnProperty('type') &&
+    body.hasOwnProperty('link') &&
+    body.hasOwnProperty('date')
+  ) {
+    ResourceSchema.create(body)
+      .then(() => {
+        res.redirect('/admin/resources/?resourceCreated=yes');
+      })
+      .catch(() => {
+        res.redirect('/admin/resources/?error=yes');
+      });
+  } else {
+    let data: string = '';
+
+    req.on('data', (chunk: Buffer): void => {
+      data += chunk;
+    });
+    req.on('end', async () => {
+      data = JSON.parse(data);
+
+      ResourceSchema.deleteOne({ _id: data.id })
+        .then(() => {
+          res.status(200).send();
+        })
+        .catch(() => {
+          res.status(500).send();
+        });
+    });
+  }
+};
+
 export default {
   getHomepage,
   postMemberPage,
@@ -232,4 +280,6 @@ export default {
   postTripsPage,
   getSettingsPage,
   postSettingsPage,
+  getResourcesPage,
+  postResourcesPage,
 };

@@ -5,6 +5,7 @@ import homeController from './controllers/homeController';
 import memberController from './controllers/memberController';
 import adminController from './controllers/admin/adminController';
 import authController from './controllers/auth';
+import contactController from './controllers/contactController';
 
 const adminMiddleware = (req: Request, res: Response, next: NextFunction) => {
   req.session.hasOwnProperty('client') ? next() : res.redirect('/');
@@ -35,10 +36,21 @@ Router.post(
   adminMiddleware,
   adminController.postSettingsPage
 );
+Router.get(
+  '/admin/resources',
+  adminMiddleware,
+  adminController.getResourcesPage
+);
+Router.post(
+  '/admin/resources',
+  adminMiddleware,
+  adminController.postResourcesPage
+);
 
 Router.get('/register', authController.getRegisterPage);
 Router.post('/register', authController.postRegisterPage);
 Router.get('/login', authController.getLoginPage);
 Router.post('/login', authController.postLoginPage);
+Router.post('/contact', contactController.postContactPage);
 
 export default Router;

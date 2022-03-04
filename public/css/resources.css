@@ -1,0 +1,26 @@
+#resources-header {
+  margin-top: 250px;
+  color: #25b79f;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#resources {
+}
+
+.jumbotron {
+  background-color: rgb(36, 36, 36) !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.display-4 {
+  color: white;
+}
+
+.resource-btn {
+  background-color: #25b79f !important;
+}
+
+.lead {
+  color: #25b79f;
+}

@@ -1,15 +1,16 @@
 <link rel="stylesheet" href="/css/entertainment.css">
 <script src="/js/entertainment.js" defer></script>
 <div id="entertainment">
+  <h2 id="entertainment-header">Entertainment</h2>
   <div id="entertainment-btns">
     <div>
-      <button type="button" class="btn btn-dark entertainment-btn" id="covid-btn">COVID</button>
+      <button type="button" class="btn btn-light entertainment-btn" id="covid-btn">COVID</button>
     </div>
     <div>
-      <button type="button" class="btn btn-dark entertainment-btn" id="country-btn">Countries</button>
+      <button type="button" class="btn btn-light entertainment-btn" id="country-btn">Countries</button>
     </div>
     <div>
-      <button type="button" class="btn btn-dark entertainment-btn" id="movie-btn">Movies</button>
+      <button type="button" class="btn btn-light entertainment-btn" id="movie-btn">Movies</button>
     </div>
   </div>
   <div id="api-display-screen">
@@ -18,7 +19,7 @@
         <div class="search-wrapper">
           <input type="text" placeholder="Country Name" class="form-control entertainment-input" required id="covid-country-input"/>
           <button type="button" class="btn btn-success api-search-btn" onclick="fetchCOVID()">Search</button>
-          <div class="spinner-border text-dark" role="status" id="covid-spinner">
+          <div class="spinner-border text-light" role="status" id="covid-spinner">
             <span class="sr-only">Loading...</span>
           </div>
         </div>
@@ -28,6 +29,9 @@
         <div class="search-wrapper">
           <input type="text" placeholder="Country Name" class="form-control entertainment-input" required id="country-data-input"/>
           <button type="button" class="btn btn-success api-search-btn" onclick="fetchCountry()">Search</button>
+          <div class="spinner-border text-light" role="status" id="country-spinner">
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
       <div id="movie" class="entertainment-input-wrapper">
@@ -35,7 +39,7 @@
         <div class="search-wrapper">
           <input type="text" placeholder="Movie/Show Name" class="form-control entertainment-input" required id="movie-input"/>
           <button type="button" class="btn btn-success api-search-btn" onclick="fetchMovies()">Search</button>
-          <div class="spinner-border text-dark" role="status" id="movie-spinner">
+          <div class="spinner-border text-light" role="status" id="movie-spinner">
             <span class="sr-only">Loading...</span>
           </div>
         </div>
@@ -54,3 +58,8 @@
       </div>
   </div>
 </div>
+
+
+
+
+

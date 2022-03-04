@@ -10,6 +10,7 @@ const Admin_1 = __importDefault(require("../../schema/Admin"));
 const Officer_1 = __importDefault(require("../../schema/Officer"));
 const Pings_1 = __importDefault(require("../../schema/Pings"));
 const email_1 = __importDefault(require("../../helpers/email"));
+const Resource_1 = __importDefault(require("../../schema/Resource"));
 const getHomepage = (req, res) => {
     res.render('./admin/home', {});
 };
@@ -201,6 +202,47 @@ const getSettingsPage = async (req, res) => {
 const postSettingsPage = (req, res) => {
     res.render('admin/settings', {});
 };
+const getResourcesPage = async (req, res) => {
+    res.render('admin/resources', {
+        resources: (await Resource_1.default.find()).map(resource => {
+            resource._id = resource._id.toString();
+            return resource;
+        }),
+        error: req.query.error === 'yes',
+        resourceCreated: req.query.resourceCreated === 'yes',
+    });
+};
+const postResourcesPage = (req, res) => {
+    const body = { ...req.body };
+    if (body.hasOwnProperty('title') &&
+        body.hasOwnProperty('type') &&
+        body.hasOwnProperty('link') &&
+        body.hasOwnProperty('date')) {
+        Resource_1.default.create(body)
+            .then(() => {
+            res.redirect('/admin/resources/?resourceCreated=yes');
+        })
+            .catch(() => {
+            res.redirect('/admin/resources/?error=yes');
+        });
+    }
+    else {
+        let data = '';
+        req.on('data', (chunk) => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            data = JSON.parse(data);
+            Resource_1.default.deleteOne({ _id: data.id })
+                .then(() => {
+                res.status(200).send();
+            })
+                .catch(() => {
+                res.status(500).send();
+            });
+        });
+    }
+};
 exports.default = {
     getHomepage,
     postMemberPage,
@@ -212,4 +254,6 @@ exports.default = {
     postTripsPage,
     getSettingsPage,
     postSettingsPage,
+    getResourcesPage,
+    postResourcesPage,
 };
