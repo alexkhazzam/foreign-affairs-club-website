@@ -6,15 +6,14 @@
   height: 100vh;
 }
 
-/* #welcome-text-wrapper {
+#welcome-text-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   text-align: center;
-} */
+}
 
-/* 
 #welcome-text,
 #welcome-text-cursor {
   color: #fff;
@@ -31,6 +30,7 @@
   }
 }
 
+/* 
 .bg_move {
   font-size: 3rem;
   text-align: center;
